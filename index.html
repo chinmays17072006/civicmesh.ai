@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CivicMesh — Incident Command Center</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div>
+                <h1>CivicMesh</h1>
+                <p>AI INCIDENT INTELLIGENCE</p>
+            </div>
+
+        </div>
+
+
+        <nav class="nav">
+
+            <button class="nav-item" onclick="goDashboard()">
+                <span class="nav-icon">⌂</span>
+                <span>Command Center</span>
+            </button>
+
+            <button class="nav-item active">
+                <span class="nav-icon">◈</span>
+                <span>Incidents</span>
+                <span class="nav-count">07</span>
+            </button>
+
+            <button class="nav-item" onclick="scrollToAgents()">
+                <span class="nav-icon">⌁</span>
+                <span>Agent Network</span>
+            </button>
+
+            <button class="nav-item" onclick="scrollToEvidence()">
+                <span class="nav-icon">◎</span>
+                <span>Evidence</span>
+            </button>
+
+            <button class="nav-item" onclick="scrollToReview()">
+                <span class="nav-icon">✓</span>
+                <span>Approvals</span>
+                <span class="approval-dot"></span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+
+                <div class="status-indicator"></div>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>All agents operational</small>
+                </div>
+
+            </div>
+
+            <div class="version">
+                CIVICMESH v0.1 • DEMO
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="breadcrumb">
+                <span>INCIDENTS</span>
+                <b>/</b>
+                <strong>CM-0142</strong>
+            </div>
+
+            <div class="top-actions">
+
+                <div class="live-status">
+                    <span></span>
+                    LIVE DEMO
+                </div>
+
+                <button
+                    class="icon-button"
+                    onclick="refreshIncident()">
+                    ↻
+                </button>
+
+                <div class="operator">
+
+                    <div class="operator-avatar">
+                        OP
+                    </div>
+
+                    <div>
+                        <strong>Operator</strong>
+                        <small>Human Review</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- INCIDENT HEADER -->
+
+        <section class="incident-header">
+
+            <div class="incident-title-area">
+
+                <div
+                    class="back-button"
+                    onclick="goDashboard()">
+                    ←
+                </div>
+
+                <div>
+
+                    <div class="eyebrow">
+                        PROBABLE CIVIC INCIDENT
+                    </div>
+
+                    <h2>
+                        Deep pothole near University Gate
+                    </h2>
+
+                    <div class="incident-meta">
+
+                        <span class="incident-id">
+                            CM-0142
+                        </span>
+
+                        <span>•</span>
+
+                        <span>
+                            7 reports fused
+                        </span>
+
+                        <span>•</span>
+
+                        <span>
+                            Confidence 94%
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="incident-actions">
+
+                <div class="priority-badge">
+                    <span class="priority-dot"></span>
+                    HIGH PRIORITY
+                </div>
+
+                <button
+                    class="secondary-btn"
+                    onclick="openReportModal()">
+                    + Add Report
+                </button>
+
+                <button
+                    class="primary-btn"
+                    onclick="approveIncident()">
+                    ✓ Approve Response
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- PIPELINE -->
+
+        <section class="status-strip">
+
+            <div class="status-step complete">
+                <div class="step-icon">✓</div>
+                <div>
+                    <small>01</small>
+                    <strong>INTAKE</strong>
+                </div>
+            </div>
+
+            <div class="status-line complete"></div>
+
+            <div class="status-step complete">
+                <div class="step-icon">✓</div>
+                <div>
+                    <small>02</small>
+                    <strong>EVIDENCE</strong>
+                </div>
+            </div>
+
+            <div class="status-line complete"></div>
+
+            <div class="status-step complete">
+                <div class="step-icon">✓</div>
+                <div>
+                    <small>03</small>
+                    <strong>FUSION</strong>
+                </div>
+            </div>
+
+            <div class="status-line complete"></div>
+
+            <div class="status-step complete">
+                <div class="step-icon">✓</div>
+                <div>
+                    <small>04</small>
+                    <strong>PRIORITY</strong>
+                </div>
+            </div>
+
+            <div class="status-line complete"></div>
+
+            <div class="status-step complete">
+                <div class="step-icon">✓</div>
+                <div>
+                    <small>05</small>
+                    <strong>ROUTING</strong>
+                </div>
+            </div>
+
+            <div class="status-line active-line"></div>
+
+            <div class="status-step active">
+                <div class="step-icon">06</div>
+                <div>
+                    <small>NOW</small>
+                    <strong>PLAN</strong>
+                </div>
+            </div>
+
+            <div class="status-line"></div>
+
+            <div class="status-step">
+                <div class="step-icon">07</div>
+                <div>
+                    <small>NEXT</small>
+                    <strong>REVIEW</strong>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- LIVE AGENT NETWORK -->
+
+        <section
+            class="panel agent-network-panel"
+            id="agentNetwork">
+
+            <div class="agent-network-header">
+
+                <div>
+
+                    <span class="section-label">
+                        AGENT ORCHESTRATION
+                    </span>
+
+                    <h3>
+                        Live CivicMesh Agent Network
+                    </h3>
+
+                    <p>
+                        Specialized agents transform fragmented observations
+                        into one reviewable civic incident.
+                    </p>
+
+                </div>
+
+                <button
+                    class="pipeline-btn"
+                    id="pipelineButton"
+                    onclick="runAgentPipeline()">
+
+                    <span>▶</span>
+                    Run Agent Pipeline
+
+                </button>
+
+            </div>
+
+
+            <div class="agent-pipeline">
+
+                <div class="agent-card" data-agent="0">
+                    <div class="agent-number">01</div>
+                    <div class="agent-icon">IN</div>
+
+                    <div class="agent-info">
+                        <strong>Intake Agent</strong>
+                        <span>Normalizes reports</span>
+                    </div>
+
+                    <div class="agent-state">READY</div>
+                </div>
+
+
+                <div class="agent-connector">
+                    <span></span>
+                </div>
+
+
+                <div class="agent-card" data-agent="1">
+                    <div class="agent-number">02</div>
+                    <div class="agent-icon">EV</div>
+
+                    <div class="agent-info">
+                        <strong>Evidence Agent</strong>
+                        <span>Extracts evidence</span>
+                    </div>
+
+                    <div class="agent-state">READY</div>
+                </div>
+
+
+                <div class="agent-connector">
+                    <span></span>
+                </div>
+
+
+                <div class="agent-card" data-agent="2">
+                    <div class="agent-number">03</div>
+                    <div class="agent-icon">FX</div>
+
+                    <div class="agent-info">
+                        <strong>Fusion Agent</strong>
+                        <span>Finds duplicates</span>
+                    </div>
+
+                    <div class="agent-state">READY</div>
+                </div>
+
+
+                <div class="agent-connector">
+                    <span></span>
+                </div>
+
+
+                <div class="agent-card" data-agent="3">
+                    <div class="agent-number">04</div>
+                    <div class="agent-icon">PR</div>
+
+                    <div class="agent-info">
+                        <strong>Priority Agent</strong>
+                        <span>Scores risk</span>
+                    </div>
+
+                    <div class="agent-state">READY</div>
+                </div>
+
+
+                <div class="agent-connector">
+                    <span></span>
+                </div>
+
+
+                <div class="agent-card" data-agent="4">
+                    <div class="agent-number">05</div>
+                    <div class="agent-icon">RT</div>
+
+                    <div class="agent-info">
+                        <strong>Routing Agent</strong>
+                        <span>Maps department</span>
+                    </div>
+
+                    <div class="agent-state">READY</div>
+                </div>
+
+
+                <div class="agent-connector">
+                    <span></span>
+                </div>
+
+
+                <div class="agent-card" data-agent="5">
+                    <div class="agent-number">06</div>
+                    <div class="agent-icon">PL</div>
+
+                    <div class="agent-info">
+                        <strong>Response Planner</strong>
+                        <span>Builds action plan</span>
+                    </div>
+
+                    <div class="agent-state">READY</div>
+                </div>
+
+
+                <div class="agent-connector">
+                    <span></span>
+                </div>
+
+
+                <div class="agent-card" data-agent="6">
+                    <div class="agent-number">07</div>
+                    <div class="agent-icon">RV</div>
+
+                    <div class="agent-info">
+                        <strong>Review Agent</strong>
+                        <span>Checks confidence</span>
+                    </div>
+
+                    <div class="agent-state">READY</div>
+                </div>
+
+            </div>
+
+
+            <div class="agent-context">
+
+                <div class="context-label">
+                    LIVE AGENT CONTEXT
+                </div>
+
+                <div class="context-main">
+
+                    <div class="context-orb">
+                        <div class="context-orb-inner">
+                            AI
+                        </div>
+                    </div>
+
+                    <div>
+
+                        <strong id="agentActivityTitle">
+                            Awaiting pipeline execution
+                        </strong>
+
+                        <p id="agentActivityText">
+                            Run the pipeline to watch CM-0142
+                            move through the CivicMesh reasoning system.
+                        </p>
+
+                    </div>
+
+                    <div class="context-progress">
+
+                        <div class="progress-number">
+
+                            <span id="agentProgressNumber">
+                                0
+                            </span>
+
+                            <small>/ 7</small>
+
+                        </div>
+
+                        <div class="progress-track">
+                            <div
+                                id="agentProgressBar"
+                                class="progress-fill">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INCIDENT GRID -->
+
+        <section class="incident-grid">
+
+
+            <!-- LEFT -->
+
+            <div class="left-column">
+
+
+                <!-- OVERVIEW -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="section-label">
+                                INCIDENT OVERVIEW
+                            </span>
+
+                            <h3>
+                                What CivicMesh detected
+                            </h3>
+                        </div>
+
+                        <span class="verified-badge">
+                            AI VERIFIED
+                        </span>
+
+                    </div>
+
+
+                    <div class="overview-content">
+
+                        <div class="description-box">
+
+                            <div class="quote-mark">
+                                “
+                            </div>
+
+                            <p>
+                                Deep pothole near the university gate.
+                                Water is collecting inside and vehicles
+                                are swerving to avoid it.
+                            </p>
+
+                            <div class="description-footer">
+
+                                <span>
+                                    Normalized from citizen reports
+                                </span>
+
+                                <span>
+                                    Confidence 94%
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="quick-facts">
+
+                            <div class="fact">
+                                <span>ISSUE TYPE</span>
+                                <strong>Road Hazard</strong>
+                            </div>
+
+                            <div class="fact">
+                                <span>LOCATION</span>
+                                <strong>University Gate</strong>
+                            </div>
+
+                            <div class="fact">
+                                <span>REPORTS</span>
+                                <strong id="reportFact">
+                                    7 related
+                                </strong>
+                            </div>
+
+                            <div class="fact">
+                                <span>CONFIDENCE</span>
+                                <strong class="confidence">
+                                    94%
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MAP -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                LOCATION
+                            </span>
+
+                            <h3>
+                                Incident concentration
+                            </h3>
+
+                        </div>
+
+                        <span class="map-tag">
+                            ● UNIVERSITY ZONE
+                        </span>
+
+                    </div>
+
+
+                    <div class="map">
+
+                        <div class="map-grid"></div>
+
+                        <div class="road road-a"></div>
+                        <div class="road road-b"></div>
+                        <div class="road road-c"></div>
+
+                        <div class="building b1"></div>
+                        <div class="building b2"></div>
+                        <div class="building b3"></div>
+                        <div class="building b4"></div>
+                        <div class="building b5"></div>
+
+                        <div class="map-label">
+                            UNIVERSITY GATE
+                        </div>
+
+                        <div class="incident-pin">
+
+                            <div class="pin-pulse"></div>
+
+                            <div class="pin-core">
+                                !
+                            </div>
+
+                        </div>
+
+                        <div class="map-tooltip">
+
+                            <strong>
+                                CM-0142
+                            </strong>
+
+                            <span>
+                                7 reports within cluster
+                            </span>
+
+                        </div>
+
+                        <div class="map-controls">
+                            <button>+</button>
+                            <button>−</button>
+                        </div>
+
+                        <div class="map-coordinates">
+                            DEMO LOCATION<br>
+                            UNIVERSITY ZONE
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SOURCE REPORTS -->
+
+                <div
+                    class="panel"
+                    id="evidencePanel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                SOURCE REPORTS
+                            </span>
+
+                            <h3 id="reportsTitle">
+                                7 reports fused into this incident
+                            </h3>
+
+                        </div>
+
+                        <button
+                            class="text-button"
+                            onclick="showAllReports()">
+
+                            View all →
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="reports-list">
+
+                        <div class="report-row">
+
+                            <div class="report-number">
+                                01
+                            </div>
+
+                            <div class="report-main">
+                                <strong>
+                                    “Huge pothole near the gate.”
+                                </strong>
+
+                                <span>
+                                    Citizen report • 4 min ago
+                                </span>
+                            </div>
+
+                            <div class="report-signal">
+                                <span>TEXT</span>
+                                <b>96%</b>
+                            </div>
+
+                        </div>
+
+
+                        <div class="report-row">
+
+                            <div class="report-number">
+                                02
+                            </div>
+
+                            <div class="report-main">
+                                <strong>
+                                    “Water-filled road damage.”
+                                </strong>
+
+                                <span>
+                                    Citizen report • 5 min ago
+                                </span>
+                            </div>
+
+                            <div class="report-signal">
+                                <span>TEXT</span>
+                                <b>93%</b>
+                            </div>
+
+                        </div>
+
+
+                        <div class="report-row">
+
+                            <div class="report-number">
+                                03
+                            </div>
+
+                            <div class="report-main">
+                                <strong>
+                                    “Cars are swerving around it.”
+                                </strong>
+
+                                <span>
+                                    Citizen report • 6 min ago
+                                </span>
+                            </div>
+
+                            <div class="report-signal">
+                                <span>TEXT</span>
+                                <b>91%</b>
+                            </div>
+
+                        </div>
+
+
+                        <div class="report-row">
+
+                            <div class="report-number">
+                                04
+                            </div>
+
+                            <div class="report-main">
+                                <strong>
+                                    “Pothole getting bigger.”
+                                </strong>
+
+                                <span>
+                                    Citizen report • 7 min ago
+                                </span>
+                            </div>
+
+                            <div class="report-signal">
+                                <span>TEXT</span>
+                                <b>89%</b>
+                            </div>
+
+                        </div>
+
+
+                        <div class="report-row muted-row">
+
+                            <div class="report-number">
+                                05–07
+                            </div>
+
+                            <div class="report-main">
+
+                                <strong>
+                                    3 additional related observations
+                                </strong>
+
+                                <span>
+                                    Fused by semantic + contextual signals
+                                </span>
+
+                            </div>
+
+                            <div class="report-signal">
+                                <span>FUSED</span>
+                                <b>87%</b>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT -->
+
+            <div class="right-column">
+
+
+                <!-- AI REASONING -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                AI REASONING
+                            </span>
+
+                            <h3>
+                                Why these reports belong together
+                            </h3>
+
+                        </div>
+
+                        <div class="ai-orb-small">
+                            AI
+                        </div>
+
+                    </div>
+
+
+                    <div class="reasoning-list">
+
+                        <div class="reasoning-item">
+
+                            <div class="reason-icon semantic">
+                                S
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Semantic similarity
+                                </strong>
+
+                                <p>
+                                    Reports describe the same road hazard:
+                                    pothole, road damage and water-filled surface.
+                                </p>
+
+                                <div class="reason-score">
+                                    <div class="score-track">
+                                        <div style="width:94%"></div>
+                                    </div>
+
+                                    <span>94%</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="reasoning-item">
+
+                            <div class="reason-icon geo">
+                                G
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Geographic proximity
+                                </strong>
+
+                                <p>
+                                    Report locations fall within the same
+                                    university-gate incident cluster.
+                                </p>
+
+                                <div class="reason-score">
+                                    <div class="score-track">
+                                        <div style="width:91%"></div>
+                                    </div>
+
+                                    <span>91%</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="reasoning-item">
+
+                            <div class="reason-icon context">
+                                C
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Contextual consistency
+                                </strong>
+
+                                <p>
+                                    Water accumulation and vehicle swerving
+                                    reinforce the same underlying event.
+                                </p>
+
+                                <div class="reason-score">
+                                    <div class="score-track">
+                                        <div style="width:88%"></div>
+                                    </div>
+
+                                    <span>88%</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="fusion-result">
+
+                        <div class="fusion-check">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Probable incident detected
+                            </strong>
+
+                            <span>
+                                7 observations → 1 operational event
+                            </span>
+
+                        </div>
+
+                        <b>
+                            94%
+                        </b>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRIORITY -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                PRIORITY ASSESSMENT
+                            </span>
+
+                            <h3>
+                                High priority
+                            </h3>
+
+                        </div>
+
+                        <div class="priority-score">
+                            82<span>/100</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="priority-meter">
+
+                        <div class="meter-track">
+                            <div class="meter-fill"></div>
+                        </div>
+
+                        <div class="meter-labels">
+                            <span>LOW</span>
+                            <span>MEDIUM</span>
+                            <span>HIGH</span>
+                            <span>CRITICAL</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="priority-reasons">
+
+                        <div>
+                            <span>01</span>
+                            <p>Vehicle safety risk reported</p>
+                        </div>
+
+                        <div>
+                            <span>02</span>
+                            <p>Multiple independent observations</p>
+                        </div>
+
+                        <div>
+                            <span>03</span>
+                            <p>Water accumulation may worsen hazard</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ROUTING -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                ROUTING AGENT
+                            </span>
+
+                            <h3>
+                                Recommended department
+                            </h3>
+
+                        </div>
+
+                        <span class="route-status">
+                            READY
+                        </span>
+
+                    </div>
+
+
+                    <div class="department-card">
+
+                        <div class="department-icon">
+                            RM
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Road Maintenance
+                            </strong>
+
+                            <span>
+                                Civic Infrastructure
+                            </span>
+
+                        </div>
+
+                        <div class="route-confidence">
+
+                            <strong>96%</strong>
+
+                            <span>
+                                match
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="route-path">
+
+                        <div class="route-node active">
+                            <span></span>
+                            CivicMesh
+                        </div>
+
+                        <div class="route-connector"></div>
+
+                        <div class="route-node">
+                            <span></span>
+                            Road Maintenance
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RESPONSE PLANNER ================= -->
+
+        <section
+            class="planner-section"
+            id="responsePlanner">
+
+            <div class="planner-header">
+
+                <div>
+
+                    <span class="section-label">
+                        RESPONSE PLANNER
+                    </span>
+
+                    <h2>
+                        From incident intelligence to action
+                    </h2>
+
+                    <p>
+                        CivicMesh converts the verified incident context
+                        into a transparent, reviewable response sequence.
+                    </p>
+
+                </div>
+
+
+                <div class="planner-status">
+
+                    <div class="planner-status-dot"></div>
+
+                    <span id="plannerStatus">
+                        PLAN READY
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="planner-grid">
+
+
+                <!-- ACTION SEQUENCE -->
+
+                <div class="planner-card action-card">
+
+                    <div class="planner-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                ACTION SEQUENCE
+                            </span>
+
+                            <h3>
+                                Recommended next steps
+                            </h3>
+
+                        </div>
+
+                        <span class="demo-badge">
+                            DEMO
+                        </span>
+
+                    </div>
+
+
+                    <div class="action-timeline">
+
+
+                        <div
+                            class="action-item completed"
+                            data-action="0">
+
+                            <div class="action-marker">
+                                <span>✓</span>
+                            </div>
+
+                            <div class="action-content">
+
+                                <div class="action-top">
+
+                                    <strong>
+                                        Verify incident location
+                                    </strong>
+
+                                    <span>
+                                        COMPLETE
+                                    </span>
+
+                                </div>
+
+                                <p>
+                                    Confirm that the fused reports point
+                                    to the same university-gate area.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="action-item"
+                            data-action="1">
+
+                            <div class="action-marker">
+                                <span>02</span>
+                            </div>
+
+                            <div class="action-content">
+
+                                <div class="action-top">
+
+                                    <strong>
+                                        Inspect reported road damage
+                                    </strong>
+
+                                    <span>
+                                        PENDING
+                                    </span>
+
+                                </div>
+
+                                <p>
+                                    Recommend field verification of the
+                                    pothole, water accumulation and road condition.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="action-item"
+                            data-action="2">
+
+                            <div class="action-marker">
+                                <span>03</span>
+                            </div>
+
+                            <div class="action-content">
+
+                                <div class="action-top">
+
+                                    <strong>
+                                        Coordinate maintenance response
+                                    </strong>
+
+                                    <span>
+                                        PENDING
+                                    </span>
+
+                                </div>
+
+                                <p>
+                                    Route the reviewed incident to the
+                                    appropriate civic maintenance function.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="action-item"
+                            data-action="3">
+
+                            <div class="action-marker">
+                                <span>04</span>
+                            </div>
+
+                            <div class="action-content">
+
+                                <div class="action-top">
+
+                                    <strong>
+                                        Reassess after intervention
+                                    </strong>
+
+                                    <span>
+                                        PENDING
+                                    </span>
+
+                                </div>
+
+                                <p>
+                                    Compare subsequent observations to
+                                    determine whether the incident remains active.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+                        class="execute-plan-btn"
+                        id="executePlanButton"
+                        onclick="runResponsePlan()">
+
+                        ▶ Simulate Response Plan
+
+                    </button>
+
+                </div>
+
+
+                <!-- ACTION INTELLIGENCE -->
+
+                <div class="planner-card intelligence-card">
+
+                    <div class="planner-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                ACTION INTELLIGENCE
+                            </span>
+
+                            <h3>
+                                Why this plan?
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="intelligence-block">
+
+                        <div class="intelligence-icon cyan">
+                            R
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Risk signal
+                            </strong>
+
+                            <p>
+                                Vehicle swerving and water accumulation
+                                increase the urgency of verification.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="intelligence-block">
+
+                        <div class="intelligence-icon yellow">
+                            E
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Evidence dependency
+                            </strong>
+
+                            <p>
+                                Field inspection remains an important
+                                uncertainty before physical intervention.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="intelligence-block">
+
+                        <div class="intelligence-icon green">
+                            H
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Human control
+                            </strong>
+
+                            <p>
+                                Consequential action remains behind an
+                                explicit operator approval gate.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="confidence-box">
+
+                        <div>
+
+                            <span>
+                                PLAN CONFIDENCE
+                            </span>
+
+                            <strong>
+                                91%
+                            </strong>
+
+                        </div>
+
+                        <div class="confidence-line">
+                            <div></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RESOURCES -->
+
+                <div class="planner-card resources-card">
+
+                    <div class="planner-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                RESPONSE CONTEXT
+                            </span>
+
+                            <h3>
+                                Suggested resources
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="resource-list">
+
+                        <div class="resource-item">
+
+                            <div class="resource-icon">
+                                RM
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Road Maintenance
+                                </strong>
+
+                                <span>
+                                    Recommended civic function
+                                </span>
+                            </div>
+
+                            <b>
+                                96%
+                            </b>
+
+                        </div>
+
+
+                        <div class="resource-item">
+
+                            <div class="resource-icon">
+                                IN
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Incident Evidence
+                                </strong>
+
+                                <span>
+                                    7 fused observations
+                                </span>
+                            </div>
+
+                            <b>
+                                94%
+                            </b>
+
+                        </div>
+
+
+                        <div class="resource-item">
+
+                            <div class="resource-icon">
+                                HR
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Human Reviewer
+                                </strong>
+
+                                <span>
+                                    Required before action
+                                </span>
+                            </div>
+
+                            <b class="yellow">
+                                GATE
+                            </b>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EXPECTED OUTCOME -->
+
+                <div class="planner-card outcome-card">
+
+                    <div class="planner-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                EXPECTED OUTCOME
+                            </span>
+
+                            <h3>
+                                Operational objective
+                            </h3>
+
+                        </div>
+
+                        <div class="outcome-symbol">
+                            →
+                        </div>
+
+                    </div>
+
+
+                    <div class="outcome-main">
+
+                        <div class="outcome-number">
+                            01
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Resolve the identified road hazard
+                            </strong>
+
+                            <p>
+                                Use the fused evidence and reviewed action
+                                plan to coordinate the appropriate civic response.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="outcome-tags">
+
+                        <span>
+                            EVIDENCE-FIRST
+                        </span>
+
+                        <span>
+                            REVIEWABLE
+                        </span>
+
+                        <span>
+                            HUMAN CONTROL
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= REVIEW ================= -->
+
+        <section
+            class="review-section"
+            id="reviewPanel">
+
+            <div class="review-card">
+
+                <div class="review-left">
+
+                    <div class="review-icon">
+                        !
+                    </div>
+
+                    <div>
+
+                        <span class="section-label">
+                            FINAL DECISION GATE
+                        </span>
+
+                        <h2>
+                            Human review required
+                        </h2>
+
+                        <p>
+                            CivicMesh has assembled the incident,
+                            evidence, priority, routing and response plan.
+                            The operator retains the final decision.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="review-actions">
+
+                    <button
+                        class="reject-btn"
+                        onclick="rejectIncident()">
+
+                        Return for Review
+
+                    </button>
+
+                    <button
+                        class="approve-btn"
+                        id="finalApproveButton"
+                        onclick="approveIncident()">
+
+                        ✓ Approve Response
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= AUDIT ================= -->
+
+        <section class="panel audit-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="section-label">
+                        AUDIT TRAIL
+                    </span>
+
+                    <h3>
+                        Agent activity
+                    </h3>
+
+                </div>
+
+                <span class="live-tag">
+                    LIVE
+                </span>
+
+            </div>
+
+
+            <div
+                class="audit-list"
+                id="auditList">
+
+                <div class="audit-item">
+
+                    <span class="audit-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            Incident Fusion Agent
+                        </strong>
+
+                        <p>
+                            7 reports merged into CM-0142
+                        </p>
+
+                    </div>
+
+                    <time>
+                        04:02
+                    </time>
+
+                </div>
+
+
+                <div class="audit-item">
+
+                    <span class="audit-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            Priority Agent
+                        </strong>
+
+                        <p>
+                            Priority assigned: High
+                        </p>
+
+                    </div>
+
+                    <time>
+                        04:03
+                    </time>
+
+                </div>
+
+
+                <div class="audit-item">
+
+                    <span class="audit-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            Routing Agent
+                        </strong>
+
+                        <p>
+                            Recommended Road Maintenance
+                        </p>
+
+                    </div>
+
+                    <time>
+                        04:03
+                    </time>
+
+                </div>
+
+
+                <div
+                    class="audit-item waiting"
+                    id="reviewAudit">
+
+                    <span class="audit-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            Review Agent
+                        </strong>
+
+                        <p>
+                            Waiting for human approval
+                        </p>
+
+                    </div>
+
+                    <time>
+                        NOW
+                    </time>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+
+            <span>
+                CIVICMESH • EVIDENCE-FIRST CIVIC INCIDENT INTELLIGENCE
+            </span>
+
+            <span>
+                SYNTHETIC DEMO DATA • HUMAN CONTROL ENABLED
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- APPROVAL MODAL -->
+
+<div
+    class="modal-overlay"
+    id="approvalModal">
+
+    <div class="modal">
+
+        <button
+            class="modal-close"
+            onclick="closeModal('approvalModal')">
+            ×
+        </button>
+
+        <div class="modal-icon success">
+            ✓
+        </div>
+
+        <span class="section-label">
+            HUMAN APPROVAL
+        </span>
+
+        <h2>
+            Approve CM-0142?
+        </h2>
+
+        <p>
+            This records the operator's approval of the proposed
+            response sequence. CivicMesh does not directly dispatch
+            or contact an external department in this demo.
+        </p>
+
+        <div class="approval-summary">
+
+            <div>
+                <span>INCIDENT</span>
+                <strong>CM-0142</strong>
+            </div>
+
+            <div>
+                <span>PRIORITY</span>
+                <strong>HIGH</strong>
+            </div>
+
+            <div>
+                <span>ROUTE</span>
+                <strong>Road Maintenance</strong>
+            </div>
+
+        </div>
+
+        <div class="modal-actions">
+
+            <button
+                class="secondary-btn"
+                onclick="closeModal('approvalModal')">
+                Cancel
+            </button>
+
+            <button
+                class="primary-btn"
+                onclick="confirmApproval()">
+                Confirm Approval
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- REPORT MODAL -->
+
+<div
+    class="modal-overlay"
+    id="reportModal">
+
+    <div class="modal report-modal">
+
+        <button
+            class="modal-close"
+            onclick="closeModal('reportModal')">
+            ×
+        </button>
+
+        <span class="section-label">
+            CITIZEN REPORT
+        </span>
+
+        <h2>
+            Add observation
+        </h2>
+
+        <p>
+            Add a synthetic observation to demonstrate how
+            additional evidence can strengthen the incident.
+        </p>
+
+        <textarea
+            id="newReport"
+            placeholder="Example: Water is still collecting near the university gate..."></textarea>
+
+        <div class="modal-actions">
+
+            <button
+                class="secondary-btn"
+                onclick="closeModal('reportModal')">
+                Cancel
+            </button>
+
+            <button
+                class="primary-btn"
+                onclick="addReport()">
+                Add & Analyze
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast">
+
+    <div class="toast-icon">
+        ✓
+    </div>
+
+    <div>
+
+        <strong id="toastTitle">
+            Action completed
+        </strong>
+
+        <span id="toastMessage">
+            Incident updated successfully.
+        </span>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
